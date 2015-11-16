@@ -8,7 +8,7 @@ ExCloseio is currently beta software. You can install it from Hex:
 
 ```elixir
 def deps do
-  [ {:ex_closeio, "~> 0.0.1"} ]
+  [ {:ex_closeio, "~> 0.0.2"} ]
 end
 ```
 
