@@ -10,9 +10,7 @@ defmodule ExCloseio.ResultStream do
   end
 
   defp fetch_page(params, module, api_key) do
-    part    = "/" <> Base.build_part(module) <> "/"
-    url     = Base.build_url([part, params])
-    results = module.list_leads(params, api_key)
+    results = module.all(params, api_key)
 
     {:ok, %{has_more: has_more, data: items}} = results
     {items, params, has_more, module, api_key}

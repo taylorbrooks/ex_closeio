@@ -19,9 +19,7 @@ defmodule ExCloseio.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 0.8"},
-      {:poison, "~> 1.5"},
-
-      {:exvcr, "~> 0.5", only: [:dev, :test]},
+      {:poison, "~> 1.5"}
     ]
   end
 
