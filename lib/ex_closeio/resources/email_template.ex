@@ -11,7 +11,8 @@ defmodule ExCloseio.EmailTemplate do
   end
 
   def paginate(id, params, api_key \\ :global) do
-    ResultStream.new(params, api_key, __MODULE__) |> Enum.to_list
+    templates = ResultStream.new(params, api_key, __MODULE__) |> Enum.to_list
+    {:ok, templates}
   end
 
   def find(id, api_key \\ :global) do

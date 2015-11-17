@@ -10,7 +10,8 @@ defmodule ExCloseio.Lead do
   end
 
   def paginate(params, api_key \\ :global) do
-    ResultStream.new(params, api_key, __MODULE__) |> Enum.to_list
+    leads = ResultStream.new(params, api_key, __MODULE__) |> Enum.to_list
+    {:ok, leads}
   end
 
   def find(id, api_key \\ :global) do
