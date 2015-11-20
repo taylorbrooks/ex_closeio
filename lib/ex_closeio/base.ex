@@ -3,7 +3,7 @@ defmodule ExCloseio.Base do
   Provides general request making and handling functionality (for internal use).
   """
   @base_url "https://app.close.io/api/v1"
-  @headers  [{"Content-Type", "application/json"}]
+  @headers  [{"User-Agent", "ExCloseio"}, {"Content-Type", "application/json"}]
 
   @doc """
   General HTTP `GET` request function. Takes a url part
