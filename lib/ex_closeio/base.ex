@@ -63,6 +63,10 @@ defmodule ExCloseio.Base do
     end
   end
 
+  defp build_url([part]) do
+    "#{@base_url}#{part}/"
+  end
+
   defp build_url([part, []]) do
     "#{@base_url}#{part}/"
   end
