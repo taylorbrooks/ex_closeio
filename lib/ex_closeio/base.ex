@@ -20,23 +20,25 @@ defmodule ExCloseio.Base do
 
   @doc """
   General HTTP `POST` request function. Takes a url part,
-  and optionally a api_key, data Map and list of params.
+  and optionally a api_key, and a data Map.
   """
-  def post(url_part, api_key, data \\ "", params \\ []) do
+  def post(url_part, api_key, data \\ %{}) do
     auth = set_basic_auth(api_key)
+    body = Poison.encode!(data)
 
-    [url_part, params]
+    [url_part]
     |> build_url
-    |> HTTPoison.post!(data, @headers, auth)
+    |> HTTPoison.post!(body, @headers, auth)
     |> handle_response
   end
 
-  def put(url_part, api_key, params \\ []) do
+  def put(url_part, api_key, data \\ %{}) do
     auth = set_basic_auth(api_key)
+    body = Poison.encode!(data)
 
-    [url_part, params]
+    [url_part]
     |> build_url
-    |> HTTPoison.put!(@headers, auth)
+    |> HTTPoison.put!(body, @headers, auth)
     |> handle_response
   end
 
@@ -61,21 +63,12 @@ defmodule ExCloseio.Base do
     end
   end
 
-  def build_url([part, []]) do
+  defp build_url([part, []]) do
     "#{@base_url}#{part}/"
   end
 
-  def build_url([part, params]) do
+  defp build_url([part, params]) do
     "#{@base_url}#{part}?#{URI.encode_query(params)}"
-  end
-
-  def build_part(module) do
-    module
-    |> to_string
-    |> String.split(".")
-    |> Enum.reverse
-    |> hd
-    |> String.downcase
   end
 
   defp set_basic_auth(:global) do

@@ -19,7 +19,7 @@ defmodule ExCloseio.Lead do
   end
 
   def create(params, api_key \\ :global) do
-    post(@url_part, api_key)
+    post(@url_part, api_key, params)
   end
 
   def update(id, params, api_key \\ :global) do
