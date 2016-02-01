@@ -77,10 +77,10 @@ defmodule ExCloseio.Base do
 
   defp set_basic_auth(:global) do
     api_key = System.get_env("CLOSEIO_API_KEY")
-    [hackney: [basic_auth: {api_key, ""}]]
+    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20000]
   end
 
   defp set_basic_auth(api_key) do
-    [hackney: [basic_auth: {api_key, ""}]]
+    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20000]
   end
 end

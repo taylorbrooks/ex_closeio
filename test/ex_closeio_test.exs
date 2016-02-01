@@ -31,4 +31,11 @@ defmodule ExCloseioTest do
     assert Enum.count(leads) == 1580
   end
 
+  test "update lead" do
+    lead_id = "lead_lw2TrH5eMLnFz70UdF6f8zx3ElL6cPM0MHkgu4IzTFQ"
+
+    {:ok, lead} = ExCloseio.Lead.update(lead_id, %{"custom.Drip Emails: Next Template" => nil })
+    assert lead.id, lead_id
+  end
+
 end
