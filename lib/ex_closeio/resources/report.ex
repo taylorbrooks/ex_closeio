@@ -12,7 +12,7 @@ defmodule ExCloseio.Report do
   end
 
   defp get_org_id do
-    {:ok, %{data: statuses} = ExCloseio.LeadStatus.all(%{})
+    {:ok, %{data: statuses}} = ExCloseio.LeadStatus.all(%{})
     statuses |> hd |> Map.fetch!(:organization_id)
   end
 
