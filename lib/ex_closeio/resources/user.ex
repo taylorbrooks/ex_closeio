@@ -7,7 +7,7 @@ defmodule ExCloseio.User do
   end
 
   def me(api_key \\ :global) do
-    get("/me/", api_key)
+    get("/me", api_key)
   end
 
 end
