@@ -3,7 +3,7 @@ defmodule ExCloseio.Mixfile do
 
   def project do
     [app: :ex_closeio,
-     version: "0.0.12",
+     version: "0.0.13",
      elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -13,7 +13,7 @@ defmodule ExCloseio.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   defp deps do

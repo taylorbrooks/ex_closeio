@@ -61,6 +61,7 @@ ExCloseio currently supports the following Closeio endpoints:
 
 - [Contact](http://developer.close.io/#Contacts).
 - [CustomField](http://developer.close.io/#Custom-Fields)
+- [Email](http://developer.close.io/#Activities)
 - [EmailTemplate](http://developer.close.io/#Email-Templates)
 - [Lead](http://developer.close.io/#Leads)
 - [LeadStatus](http://developer.close.io/#Lead-Statuses)
