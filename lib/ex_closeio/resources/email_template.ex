@@ -1,8 +1,8 @@
 defmodule ExCloseio.EmailTemplate do
   import ExCloseio.Base
-  @url_part "/email_template/"
+  @url_part "/email_template"
 
-  def all(params, api_key \\ :global) do
+  def all(params \\ [], api_key \\ :global) do
     get(@url_part, api_key, params)
   end
 
