@@ -2,6 +2,12 @@ ExCloseio
 ========
 [![Hex.pm](https://img.shields.io/hexpm/v/ex_closeio.svg)](https://hex.pm/packages/ex_closeio)
 
+Learn about the Closeio API at http://developer.close.io.
+
+I :heart: Close.io, so if you have problems using the gem or would like to see support for new endpoints, please open a GitHub issue -- I'll get it resolved as quick as I can.
+
+Fwiw, I also run [DripEmails.com](https://www.DripEmails.com) -- a service for building automated email sequences using Close.io
+
 ## Installation
 
 ExCloseio is currently beta software. You can install it from Hex:
