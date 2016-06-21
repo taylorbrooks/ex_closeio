@@ -65,6 +65,7 @@ methods:
 
 ExCloseio currently supports the following Closeio endpoints:
 
+- [Bulk Actions](http://developer.close.io/#Bulk-Actions).
 - [Contact](http://developer.close.io/#Contacts).
 - [CustomField](http://developer.close.io/#Custom-Fields)
 - [Email](http://developer.close.io/#Activities)
