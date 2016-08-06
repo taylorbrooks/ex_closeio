@@ -56,7 +56,7 @@ defmodule ExCloseio.Base do
   end
 
   defp handle_response(data) do
-    response = Poison.decode!(data.body, keys: :atoms)
+    response = Poison.decode!(data.body)
     case data.status_code do
       200 -> {:ok, response}
       _ -> raise(ExCloseio.Error, [code: data.status_code, message: "#{response.meta.error_type}: #{response.meta.error_message}"])

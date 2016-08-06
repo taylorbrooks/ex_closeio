@@ -2,7 +2,7 @@ defmodule ExCloseio.LeadStatus do
   import ExCloseio.Base
   @url_part "/status/lead/"
 
-  def all(params, api_key \\ :global) do
+  def all(params \\ [], api_key \\ :global) do
     get(@url_part, api_key, params)
   end
 
