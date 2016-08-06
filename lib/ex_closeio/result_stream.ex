@@ -12,7 +12,7 @@ defmodule ExCloseio.ResultStream do
   defp fetch_page(params, module, api_key) do
     results = module.all(params, api_key)
 
-    {:ok, %{has_more: has_more, data: items}} = results
+    {:ok, %{"has_more" => has_more, "data" => items}} = results
     {items, params, has_more, module, api_key}
   end
 
@@ -22,9 +22,8 @@ defmodule ExCloseio.ResultStream do
 
   defp process_page({nil, params, has_more, module, api_key}) do
     params
-    |> Map.update(:_skip, 100, fn(val) -> val+100 end)
-    |> Map.merge(%{_limit: 100})
-    |> IO.inspect
+    |> Map.update("_skip", 100, fn(val) -> val+100 end)
+    |> Map.merge(%{"_limit" => 100})
     |> fetch_page(module, api_key)
     |> process_page
   end
