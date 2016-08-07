@@ -55,12 +55,15 @@ defmodule ExCloseio.Base do
     |> handle_response
   end
 
-  defp handle_response(data) do
-    response = Poison.decode!(data.body)
-    case data.status_code do
-      200 -> {:ok, response}
-      _ -> raise(ExCloseio.Error, [code: data.status_code, message: "#{response.meta.error_type}: #{response.meta.error_message}"])
-    end
+  defp handle_response(%HTTPoison.Response{status_code: 200, body: body}),
+    do: {:ok, Poison.decode!(body)}
+
+  defp handle_response(%HTTPoison.Response{status_code: status, body: body}) do
+    res = Poison.decode!(body)
+    raise(ExCloseio.Error, [
+      code: status,
+      message: res['meta']['error_type'] <> " " <> res['meta']['error_message']
+    ])
   end
 
   defp build_url([part]) do
