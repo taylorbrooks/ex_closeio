@@ -3,7 +3,7 @@ defmodule ExCloseio.CustomField do
   @url_part "/custom_fields/lead/"
 
   def all(params, api_key \\ :global) do
-    get(@url_part, params, api_key)
+    get(@url_part, api_key, params)
   end
 
   def find(id, api_key \\ :global) do
@@ -11,11 +11,11 @@ defmodule ExCloseio.CustomField do
   end
 
   def create(params, api_key \\ :global) do
-    post(@url_part, params, api_key)
+    post(@url_part, api_key, params)
   end
 
   def update(id, params, api_key \\ :global) do
-    put(@url_part <> id, params, api_key)
+    put(@url_part <> id, api_key, params)
   end
 
   def destroy(id, api_key \\ :global) do

@@ -1,4 +1,5 @@
 defmodule ExCloseio.EmailTemplate do
+  alias ExCloseio.{ResultStream}
   import ExCloseio.Base
   @url_part "/email_template"
 
@@ -7,7 +8,7 @@ defmodule ExCloseio.EmailTemplate do
   end
 
   def render(id, params, api_key \\ :global) do
-    get(@url_part <> id <> "/render/", params)
+    get(@url_part <> id <> "/render/", api_key, params)
   end
 
   def paginate(id, params, api_key \\ :global) do
@@ -20,11 +21,11 @@ defmodule ExCloseio.EmailTemplate do
   end
 
   def create(params, api_key \\ :global) do
-    post(@url_part, params, api_key)
+    post(@url_part, api_key, params)
   end
 
   def update(id, params, api_key \\ :global) do
-    put(@url_part <> id, params, api_key)
+    put(@url_part <> id, api_key, params)
   end
 
   def destroy(id, api_key \\ :global) do

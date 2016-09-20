@@ -7,7 +7,6 @@ defmodule ExCloseio.Organization do
   end
 
   def update(id, params, api_key \\ :global) do
-    put(@url_part <> id, params, api_key)
+    put(@url_part <> id, api_key, params)
   end
-
 end

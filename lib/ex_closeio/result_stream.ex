@@ -1,5 +1,4 @@
 defmodule ExCloseio.ResultStream do
-  alias ExCloseio.Base
 
   def new(params, api_key, module) do
     Stream.resource(
@@ -16,11 +15,11 @@ defmodule ExCloseio.ResultStream do
     {items, params, has_more, module, api_key}
   end
 
-  defp process_page({nil, _, false, _, api_key}) do
+  defp process_page({nil, _, false, _, _}) do
     {:halt, nil}
   end
 
-  defp process_page({nil, params, has_more, module, api_key}) do
+  defp process_page({nil, params, _, module, api_key}) do
     params
     |> Map.update("_skip", 100, fn(val) -> val+100 end)
     |> Map.merge(%{"_limit" => 100})

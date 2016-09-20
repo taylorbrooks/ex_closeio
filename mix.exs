@@ -3,7 +3,7 @@ defmodule ExCloseio.Mixfile do
 
   def project do
     [app: :ex_closeio,
-     version: "0.2.2",
+     version: "0.2.3",
      elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -19,7 +19,8 @@ defmodule ExCloseio.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 0.8"},
-      {:poison, "~> 2.1"}
+      {:poison, "~> 2.1"},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
