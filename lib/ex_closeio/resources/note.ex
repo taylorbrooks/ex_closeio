@@ -1,16 +1,20 @@
-defmodule ExCloseio.LeadStatus do
+defmodule ExCloseio.Note do
   @moduledoc """
-    LeadStatus handles communication with the lead status related
+    Note handles communication with the note related
     methods of the Close.io API.
 
-    See http://developer.close.io/#lead-statuses
+    See http://developer.close.io/#activities
   """
 
   import ExCloseio.Base
-  @url_part "/status/lead/"
+  @url_part "/activity/note/"
 
-  def all(params \\ [], api_key \\ :global) do
+  def all(params, api_key \\ :global) do
     get(@url_part, api_key, params)
+  end
+
+  def find(id, api_key \\ :global) do
+    get(@url_part <> id, api_key)
   end
 
   def create(params, api_key \\ :global) do

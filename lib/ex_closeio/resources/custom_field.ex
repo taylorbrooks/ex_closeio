@@ -1,4 +1,11 @@
 defmodule ExCloseio.CustomField do
+  @moduledoc """
+    CustomField handles communication with the custom fields related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#custom-fields
+  """
+
   import ExCloseio.Base
   @url_part "/custom_fields/lead/"
 

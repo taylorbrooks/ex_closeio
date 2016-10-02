@@ -1,4 +1,11 @@
 defmodule ExCloseio.SmartView do
+  @moduledoc """
+    SmartView handles communication with the smart views related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#smart-views
+  """
+
   import ExCloseio.Base
   @url_part "/saved_search/"
 

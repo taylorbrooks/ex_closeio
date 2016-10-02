@@ -1,4 +1,11 @@
 defmodule ExCloseio.Organization do
+  @moduledoc """
+    Organization handles communication with the organization related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#organizations
+  """
+
   import ExCloseio.Base
   @url_part "/organization/"
 

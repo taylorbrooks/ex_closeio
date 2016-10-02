@@ -1,4 +1,11 @@
 defmodule ExCloseio.Contact do
+  @moduledoc """
+    Contact handles communication with the contact related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#contacts
+  """
+
   import ExCloseio.Base
   @url_part "/contact/"
 

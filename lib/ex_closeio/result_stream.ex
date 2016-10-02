@@ -1,10 +1,11 @@
 defmodule ExCloseio.ResultStream do
+  @moduledoc ""
 
   def new(params, api_key, module) do
     Stream.resource(
       fn -> fetch_page(params, module, api_key) end,
       &process_page/1,
-      fn _ -> end
+      fn _ -> :ok end
     )
   end
 

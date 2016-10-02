@@ -1,4 +1,11 @@
 defmodule ExCloseio.User do
+  @moduledoc """
+    User handles communication with the user related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#user
+  """
+
   import ExCloseio.Base
   @url_part "/user/"
 

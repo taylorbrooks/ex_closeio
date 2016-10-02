@@ -62,28 +62,39 @@ defmodule ExCloseio.Base do
     res = Poison.decode!(body)
     raise(ExCloseio.Error, [
       code: status,
-      message: res['meta']['error_type'] <> " " <> res['meta']['error_message']
+      message: res["meta"]["error_type"] <> " " <> res["meta"]["error_message"]
     ])
   end
 
   defp build_url([part]) do
-    "#{@base_url}#{part}/"
+    @base_url <> part
+    |> set_trailing_slash
   end
 
   defp build_url([part, []]) do
-    "#{@base_url}#{part}/"
+    @base_url <> part
+    |> set_trailing_slash
   end
 
   defp build_url([part, params]) do
     "#{@base_url}#{part}?#{URI.encode_query(params)}"
   end
 
+  defp set_trailing_slash(string) do
+    string
+    |> String.ends_with?("/")
+    |> case do
+      true  -> string
+      false -> string <> "/"
+    end
+  end
+
   defp set_basic_auth(:global) do
     api_key = System.get_env("CLOSEIO_API_KEY")
-    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20000]
+    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20_000]
   end
 
   defp set_basic_auth(api_key) do
-    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20000]
+    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20_000]
   end
 end

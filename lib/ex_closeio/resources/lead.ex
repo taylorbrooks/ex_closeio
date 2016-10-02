@@ -1,4 +1,11 @@
 defmodule ExCloseio.Lead do
+  @moduledoc """
+    Lead handles communication with the lead related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#leads
+  """
+
   import ExCloseio.Base
   alias ExCloseio.ResultStream
   @url_part "/lead/"
@@ -10,7 +17,7 @@ defmodule ExCloseio.Lead do
   end
 
   def paginate(params, api_key \\ :global) do
-    leads = ResultStream.new(params, api_key, __MODULE__) |> Enum.to_list
+    leads = params |> ResultStream.new(api_key, __MODULE__) |> Enum.to_list
     {:ok, leads}
   end
 

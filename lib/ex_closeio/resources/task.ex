@@ -1,4 +1,11 @@
 defmodule ExCloseio.Task do
+  @moduledoc """
+    Task handles communication with the task related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#tasks
+  """
+
   import ExCloseio.Base
   @url_part "/task/"
 

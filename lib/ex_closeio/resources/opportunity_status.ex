@@ -1,4 +1,11 @@
 defmodule ExCloseio.OpportunityStatus do
+  @moduledoc """
+    OpportunityStatus handles communication with the opportunity status related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#opportunity-statuses
+  """
+
   import ExCloseio.Base
   @url_part "/status/opportunity/"
 

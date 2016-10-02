@@ -1,4 +1,11 @@
 defmodule ExCloseio.Report do
+  @moduledoc """
+    Report handles communication with the report related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#reporting
+  """
+
   import ExCloseio.Base
 
   # OPTIONS [date_start, date_end, user_id]

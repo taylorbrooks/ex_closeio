@@ -1,4 +1,11 @@
 defmodule ExCloseio.Opportunity do
+  @moduledoc """
+    Opportunity handles communication with the opportunity related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#opportunities
+  """
+
   import ExCloseio.Base
   @url_part "/opportunity/"
 

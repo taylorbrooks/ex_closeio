@@ -1,4 +1,11 @@
 defmodule ExCloseio.EmailTemplate do
+  @moduledoc """
+    EmailTemplate handles communication with the email template related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#email-templates
+  """
+
   alias ExCloseio.{ResultStream}
   import ExCloseio.Base
   @url_part "/email_template"
@@ -11,8 +18,8 @@ defmodule ExCloseio.EmailTemplate do
     get(@url_part <> id <> "/render/", api_key, params)
   end
 
-  def paginate(id, params, api_key \\ :global) do
-    templates = ResultStream.new(params, api_key, __MODULE__) |> Enum.to_list
+  def paginate(params, api_key \\ :global) do
+    templates = params |> ResultStream.new(api_key, __MODULE__) |> Enum.to_list
     {:ok, templates}
   end
 

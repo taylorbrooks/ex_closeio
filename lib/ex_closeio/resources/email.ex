@@ -1,4 +1,11 @@
 defmodule ExCloseio.Email do
+  @moduledoc """
+    Email handles communication with the email related
+    methods of the Close.io API.
+
+    See http://developer.close.io/#activities
+  """
+
   import ExCloseio.Base
   @url_part "/activity/email/"
 
