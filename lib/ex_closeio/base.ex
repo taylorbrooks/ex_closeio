@@ -10,12 +10,22 @@ defmodule ExCloseio.Base do
   and optionally a api_key and list of params.
   """
   def get(url_part, api_key, params \\ []) do
+    request_and_retry(url_part, api_key, params \\ [], {:attempt, 1})
+  end
+
+  def request_and_retry(url_part, api_key, params \\ [], {:error, reason}),   do: {:error, reason}
+  def request_and_retry(url_part, api_key, params \\ [], {:attempt, attempt}) do
     auth = set_basic_auth(api_key)
 
     [url_part, params]
     |> build_url
     |> HTTPoison.get!(@headers, auth)
     |> handle_response
+    |> case do
+      {:retry, reason} ->
+        request_and_retry(url_part, api_key, params, attempt_again?(attempt, reason))
+      res -> res
+    end
   end
 
   @doc """
@@ -58,6 +68,9 @@ defmodule ExCloseio.Base do
   defp handle_response(%HTTPoison.Response{status_code: 200, body: body}),
     do: {:ok, Poison.decode!(body)}
 
+  defp handle_response(%HTTPoison.Response{status_code: 429, body: body}),
+    do: {:retry, Poison.decode!(body)}
+
   defp handle_response(%HTTPoison.Response{status_code: status, body: body}) do
     res = %{body: body |> Poison.decode!, status: status}
     {:error, res}
@@ -84,6 +97,23 @@ defmodule ExCloseio.Base do
       true  -> string
       false -> string <> "/"
     end
+  end
+
+  def attempt_again?(attempt, reason) do
+    if attempt >= 10 do
+      {:error, reason}
+    else
+      attempt |> backoff
+      {:attempt, attempt + 1}
+    end
+  end
+
+  def backoff(attempt, config) do
+    (10 * :math.pow(2, attempt))
+    |> min(10_000)
+    |> trunc
+    |> :rand.uniform
+    |> :timer.sleep
   end
 
   defp set_basic_auth(:global) do
