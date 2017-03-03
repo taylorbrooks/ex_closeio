@@ -10,11 +10,11 @@ defmodule ExCloseio.Base do
   and optionally a api_key and list of params.
   """
   def get(url_part, api_key, params \\ []) do
-    request_and_retry(url_part, api_key, params \\ [], {:attempt, 1})
+    request_and_retry(url_part, api_key, params, {:attempt, 1})
   end
 
-  def request_and_retry(url_part, api_key, params \\ [], {:error, reason}),   do: {:error, reason}
-  def request_and_retry(url_part, api_key, params \\ [], {:attempt, attempt}) do
+  def request_and_retry(url_part, api_key, params, {:error, reason}),   do: {:error, reason}
+  def request_and_retry(url_part, api_key, params, {:attempt, attempt}) do
     auth = set_basic_auth(api_key)
 
     [url_part, params]
@@ -100,7 +100,7 @@ defmodule ExCloseio.Base do
   end
 
   def attempt_again?(attempt, reason) do
-    if attempt >= 10 do
+    if attempt >= 15 do
       {:error, reason}
     else
       attempt |> backoff
@@ -108,11 +108,9 @@ defmodule ExCloseio.Base do
     end
   end
 
-  def backoff(attempt, config) do
-    (10 * :math.pow(2, attempt))
-    |> min(10_000)
+  def backoff(attempt) do
+    :math.pow(4, attempt) + 15 + (:rand.uniform(30) * attempt) * 1_000
     |> trunc
-    |> :rand.uniform
     |> :timer.sleep
   end
 
