@@ -7,9 +7,9 @@ defmodule ExCloseio.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     description: description,
-     package: package,
-     deps: deps]
+     description: description(),
+     package: package(),
+     deps: deps()]
   end
 
   def application do
@@ -26,9 +26,9 @@ defmodule ExCloseio.Mixfile do
   end
 
   defp description do
-     """
-     Close.io client library for Elixir.
-     """
+    """
+    Close.io client library for Elixir.
+    """
   end
 
   defp package do
