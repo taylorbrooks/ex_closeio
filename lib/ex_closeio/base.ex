@@ -13,7 +13,7 @@ defmodule ExCloseio.Base do
     request_and_retry(url_part, api_key, params, {:attempt, 1})
   end
 
-  def request_and_retry(url_part, api_key, params, {:error, reason}),   do: {:error, reason}
+  def request_and_retry(_url_part, _api_key, _params, {:error, reason}), do: {:error, reason}
   def request_and_retry(url_part, api_key, params, {:attempt, attempt}) do
     auth = set_basic_auth(api_key)
 
