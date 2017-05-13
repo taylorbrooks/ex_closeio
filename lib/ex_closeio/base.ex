@@ -13,7 +13,7 @@ defmodule ExCloseio.Base do
     request_and_retry(url_part, api_key, params, {:attempt, 1})
   end
 
-  def request_and_retry(url_part, api_key, params, {:error, reason}),   do: {:error, reason}
+  def request_and_retry(_url_part, _api_key, _params, {:error, reason}),   do: {:error, reason}
   def request_and_retry(url_part, api_key, params, {:attempt, attempt}) do
     auth = set_basic_auth(api_key)
 
@@ -116,10 +116,10 @@ defmodule ExCloseio.Base do
 
   defp set_basic_auth(:global) do
     api_key = System.get_env("CLOSEIO_API_KEY")
-    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20_000]
+    [hackney: [basic_auth: {api_key, ""}], timeout: 20_000, recv_timeout: 20_000]
   end
 
   defp set_basic_auth(api_key) do
-    [hackney: [basic_auth: {api_key, ""}], recv_timeout: 20_000]
+    [hackney: [basic_auth: {api_key, ""}], timeout: 20_000, recv_timeout: 20_000]
   end
 end
