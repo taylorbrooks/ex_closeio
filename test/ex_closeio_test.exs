@@ -38,4 +38,14 @@ defmodule ExCloseioTest do
     assert lead.id, lead_id
   end
 
+  test "get events" do
+    ExCloseio.Event.get_events(%{object_type: "lead", action: "deleted"})
+    # If it didn't explode, it works.
+  end
+
+  test "get all events" do
+    ExCloseio.Event.get_all_events(%{})
+    # If it didn't explode, it works.
+  end
+
 end
